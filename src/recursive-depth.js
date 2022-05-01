@@ -16,23 +16,12 @@ const { NotImplementedError } = require('../extensions/index.js');
   calculateDepth(arr) {
     // throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
-    let counter = 1;
-  
-    function recursion (array) {
-      let interimArr = array.flat();
-      counter++;
-  
-      for (let i = 0; i < interimArr.length; i++) {
-        if(Array.isArray(interimArr[i])) {
-        console.log(interimArr);
-        recursion(interimArr);
-        }
-      }
-      return;
-    }
-    recursion (arr);
-    
-    return counter;
+    let countDepth = arr.reduce((acc, el) => {
+      const depth = Array.isArray(el) ? this.calculateDepth(el) : 0;
+      return depth > acc ? depth : acc;
+    }, 0);
+     
+      return 1 + countDepth;
   }
 }
 
